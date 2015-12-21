@@ -5,7 +5,7 @@ module ChessClubMatchMaker
     end
 
     def matches
-      sorted_student_list.each_slice(2).map { |pair| Match.new(pair.first, pair.last) }
+      strategy.match(students)
     end
 
     def sorted_student_list
@@ -14,6 +14,10 @@ module ChessClubMatchMaker
 
     def students
       options[:student_list]
+    end
+
+    def strategy
+      ChessClubMatchMaker.config.match_strategy
     end
   end
 end
