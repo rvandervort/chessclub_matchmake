@@ -15,10 +15,13 @@ module ChessClubMatchMaker
 
     def map_row_to_student(row)
       s = Student.new
+
       s.first_name = row[1]
       s.last_name = row[0]
       s.grade = row[2]
-      s.wins = 0
+
+      s.wins = row[5]
+
       s.level = row[3].split(" ").first.to_i
       s.teacher = row[4]
       s
@@ -41,7 +44,7 @@ module ChessClubMatchMaker
     end
 
     def student_list_worksheet
-      student_list_spreadsheet.worksheets[0]
+      @worksheet ||= student_list_spreadsheet.worksheet_by_title("Scores")
     end
   end
 end
