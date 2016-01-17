@@ -3,6 +3,7 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __FILE__)
 require 'bundler/setup'
 
 $: << File.expand_path('../app', __FILE__)
+$: << File.expand_path('../app/strategies', __FILE__)
 $: << File.expand_path('../app/services', __FILE__)
 $: << File.expand_path('../app/models', __FILE__)
 
@@ -12,7 +13,10 @@ require 'dotenv'
 Dotenv.load
 
 require 'config'
+
 require 'strategies/sort'
+require 'strategies/group_sort'
+require 'strategies/group_novice_et_al'
 require 'services/student_list_provider_service'
 require 'services/matchup_service'
 require 'models/student'
