@@ -14,20 +14,28 @@ Dotenv.load
 
 require 'config'
 
+require 'commands/base'
+require 'commands/match_maker'
+require 'commands/accumulate_scores'
+
 require 'strategies/sort'
 require 'strategies/group_sort'
 require 'strategies/group_novice_et_al'
+
 require 'services/student_list_provider_service'
 require 'services/matchup_service'
+require 'services/accumulate_scores_service'
+
 require 'models/student'
 require 'models/match'
 
-options = {
-  student_list:   ChessClubMatchMaker::StudentListProviderService.invoke
-}
+## Command
+args = ARGV
+command_name = args.shift
+command_options = args
 
-matchups = ChessClubMatchMaker::MatchupService.invoke(options).matches
+command_class_name = command_name.split("_").map(&:capitalize).join("")
 
-matchups.each do |matchup|
-  puts matchup.to_csv
-end
+command = ChessClubMatchMaker::Commands.const_get(command_class_name)
+
+command.invoke(command_options)
