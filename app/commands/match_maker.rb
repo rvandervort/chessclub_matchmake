@@ -9,16 +9,18 @@ module ChessClubMatchMaker
         matchups.each do |matchup|
           puts matchup.to_csv
         end
+
+        ChessClubMatchMaker::CreateMatchupWorksheetService.invoke(matchups: matchups, week_number: week_number)
       end
 
       private
 
       def student_list
-        ChessClubMatchMaker::StudentListProviderService.invoke
+        @student_list ||= ChessClubMatchMaker::StudentListProviderService.invoke
       end
 
       def matchups
-        ChessClubMatchMaker::MatchupService.invoke(student_list: student_list).matches
+        @matches ||= ChessClubMatchMaker::MatchupService.invoke(student_list: student_list, week_number: week_number).matches
       end
 
       def week_number

@@ -25,6 +25,7 @@ require 'strategies/group_novice_et_al'
 require 'services/student_list_provider_service'
 require 'services/matchup_service'
 require 'services/accumulate_scores_service'
+require 'services/create_matchup_worksheet_service'
 
 require 'models/student'
 require 'models/match'

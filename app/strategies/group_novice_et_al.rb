@@ -20,7 +20,7 @@ module ChessClubMatchMaker
       end
 
       def self.compare(a,b)
-        [:level, :wins, :grade, :teacher].each do |property|
+        [:level, :grade, :wins, :teacher].each do |property|
           if a.send(property) < b.send(property)
             return -1
           elsif a.send(property) > b.send(property)

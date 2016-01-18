@@ -10,8 +10,12 @@ module ChessClubMatchMaker
       "#{last_name}, #{first_name} [#{level}-#{wins}-#{grade}]"
     end
 
+    def as_key
+      "#{last_name},#{first_name}"
+    end
+
     def to_csv
-      [last_name, first_name, grade, level_to_descr(level - 1), teacher].map { |v| "\"#{v}\"" }.join(",")
+      [last_name, first_name, grade, level_to_descr, teacher].map { |v| "\"#{v}\"" }.join(",")
     end
 
     def level_to_descr

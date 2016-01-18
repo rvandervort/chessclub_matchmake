@@ -17,6 +17,10 @@ module ChessClubMatchMaker
       end
     end
 
+    def worksheet_for_week(week_number)
+      chessclub_spreadsheet.worksheet_by_title("Week #{week_number}") || chessclub_spreadsheet.add_worksheet("Week #{week_number}")
+    end
+
     private
 
     def chessclub_spreadsheet
